@@ -55,7 +55,7 @@ fn get_op_code(instruction: &Instructions) -> Vec<u8> {
 }
 
 fn string_to_binary_array(data: &str) -> Vec<u8> {
-    let number = u8::from_str_radix(data, 10).expect("Failed to parse string as number");
+    let number = i8::from_str_radix(data, 10).expect("Failed to parse string as number") as u8;
     let mut binary_array: Vec<u8> = vec![];
 
     for i in 0..8 {
@@ -196,7 +196,42 @@ pub fn encode_commands(commands: &mut Vec<Command>) -> Result<(), String>{
 
             }
             Instructions::J     =>  {
+                println!("Add instruction: {}", &command.instruction);
+                println!("Arguments:");
+                for arg in &command.arguments {
+                    println!("> {}", arg.c_value);
+                }
+
+                command_binary_array.push(1);
+                command_binary_array.push(0);
+                command_binary_array.push(0);
+                // WS
+                command_binary_array.push(0);
+                // ALUop
+                command_binary_array.extend(&get_alu_op(&command.instruction));
+                // rs1
+                command_binary_array.push(0);
+                command_binary_array.push(0);
+                command_binary_array.push(0);
+                command_binary_array.push(0);
+                command_binary_array.push(0);
+                // rs2
+                command_binary_array.push(0);
+                command_binary_array.push(0);
+                command_binary_array.push(0);
+                command_binary_array.push(0);
+                command_binary_array.push(0);
+                // offset
+                command_binary_array.extend(&string_to_binary_array(&command.arguments[0].c_value));
+                // WA
+                command_binary_array.push(0);
+                command_binary_array.push(0);
+                command_binary_array.push(0);
+                command_binary_array.push(0);
+                command_binary_array.push(0);
                 
+                let cmd = binary_array_to_int(&command_binary_array);
+                lines.push(cmd);
             }
             Instructions::CIN   =>  {
 
