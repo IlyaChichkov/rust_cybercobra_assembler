@@ -63,14 +63,6 @@ fn string_to_binary_array(data: &str) -> Vec<u8> {
     return binary_array;
 }
 
-fn create_binary_array() -> Vec<u8> {
-    let mut data: Vec<u8> = Vec::with_capacity(32);  // Pre-allocate for efficiency
-    for _ in 0..32 {
-      data.push(if rand::random() { 0 } else { 1 });  // Push random 0 or 1
-    }
-    data
-} 
-
 fn binary_array_to_int(binary_data: &Vec<u8>) -> u32 {
     let mut value: u32 = 0;
     for (i, bit) in binary_data.iter().enumerate() {
