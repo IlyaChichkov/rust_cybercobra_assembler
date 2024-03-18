@@ -322,7 +322,6 @@ fn get_arguments(instruction: &Instructions, command_line: &String) -> Result<Ve
 pub fn command_decoder(command_line: String, line_index: u32) -> Result<Command, String> {
     let instruction = get_command_instruction(&command_line);
     let has_label = check_command_has_label(&instruction);
-    //println!("Instruction {} has label: {}", instruction, has_label);
     let arguments: Vec<CommandArg> = get_arguments(&instruction, &command_line)?;
     let cmd = Command { text: (command_line), index: (line_index), instruction: (instruction), arguments: (arguments), has_label: (has_label), instruction_type: (InstructionType::None) };
     return Ok(cmd);
@@ -356,7 +355,6 @@ pub fn fill_labels(command: &mut Command, labels: &[Label]) -> Result<(), String
     let mut offset: i64 = 0;
     for label in &labels[..] {
         if label.name == label_name {
-            // TODO: Check destination is < 2^10
             let command_index: i32 = command.index as i32;
             let label_index: i32 = label.index as i32;
             offset = (label_index - command_index) as i64;
@@ -391,30 +389,20 @@ pub fn get_decoded_lines(data: &str) -> Result<Vec<Command>, String>{
             if command_line.chars().last().unwrap() == ':'
             {
                 let label_name = command_line.replace(":", "").replace(" ", "");
-                //println!("label: _{}_ #{}", command_line, instruction_cnt);
                 labels.push(Label { name: (label_name), index: (instruction_cnt) });
             }
             else {
-                //println!("line : _{}_ #{}", command_line, instruction_cnt);
                 let command = command_line.replace(",", "");
                 commands.push(command_decoder(command, instruction_cnt)?);
                 instruction_cnt += 1;
             }
         }
-        else {
-            //println!("empty:");
-        }
     }
+
     for command in &mut commands {
         fill_labels(command, &labels[..])?;
         replace_registers(command);
     }
-
-    for command in &commands[..] {
-        println!("command: {} #{}", command.text, command.index);
-        for arg in &command.arguments {
-            println!("> args: {}, {}", arg.c_type, arg.c_value);
-        }
-    }
+    
     return Ok(commands);
 }
