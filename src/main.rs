@@ -6,9 +6,9 @@ use std::env;
 mod decoder;
 mod encoder;
 
-fn readFile(file_path: &str) -> Result<(), Box<dyn std::error::Error + 'static>> {
+fn read_file(file_path: &str) -> Result<(), Box<dyn std::error::Error + 'static>> {
     let foo: String = String::from_utf8_lossy(&fs::read(file_path)?).parse()?;
-    // println!("> {}", foo);
+    
     let mut commands = decoder::decoder::get_decoded_lines(&foo)?;
     let _ = encoder::encoder::encode_commands(&mut commands);
     return Ok(());
@@ -20,6 +20,6 @@ fn main() {
     println!("Program started!");
     if args.len() > 1 {
         let programPath = &args[1];
-        readFile(programPath);
+        let _ = read_file(programPath);
     }
 }

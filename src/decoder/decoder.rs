@@ -301,7 +301,7 @@ pub fn get_decoded_lines(data: &str) -> Result<Vec<Command>, String>{
 
     for command in &mut commands {
         fill_labels(command, &labels[..])?;
-        replace_registers(command);
+        replace_registers(command)?;
     }
     
     return Ok(commands);

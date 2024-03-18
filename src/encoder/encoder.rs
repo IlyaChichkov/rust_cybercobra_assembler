@@ -1,4 +1,4 @@
-use crate::decoder::decoder::{self, Command, Instructions};
+use crate::decoder::decoder::{ Command, Instructions};
 
 
 fn get_alu_op(operation: &Instructions) -> Vec<u8> {
@@ -44,7 +44,7 @@ fn binary_array_to_int(binary_data: &Vec<u8>) -> u32 {
 }
 
 fn fill_binary_array(array: &mut Vec<u8>, cnt: u32) {
-    for i in 0..cnt {
+    for _ in 0..cnt {
         array.push(0)
     }
 }
