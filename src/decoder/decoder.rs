@@ -132,26 +132,26 @@ pub fn check_command_has_label(instruction: &Instructions) -> bool {
         Instructions::None => {
             panic!("Unknown instruction: None");
         }
-        Instructions::ADD   =>  false,
-        Instructions::SUB   =>  false,
-        Instructions::XOR   =>  false,
-        Instructions::OR    =>  false,
-        Instructions::AND   =>  false,
-        Instructions::SRA   =>  false,
-        Instructions::SLL   =>  false,
-        Instructions::SRL   =>  false,
-        Instructions::SLTS  =>  false,
+        Instructions::ADD   |
+        Instructions::SUB   |
+        Instructions::XOR   |
+        Instructions::OR    |
+        Instructions::AND   |
+        Instructions::SRA   |
+        Instructions::SLL   |
+        Instructions::SRL   |
+        Instructions::SLTS  |
+        Instructions::CIN   |
+        Instructions::COUT  |
+        Instructions::LI    |
         Instructions::SLTU  =>  false,
-        Instructions::BLT   =>  true,
-        Instructions::BLTU  =>  true,
-        Instructions::BGE   =>  true,
-        Instructions::BGEU  =>  true,
-        Instructions::BEQ   =>  true,
-        Instructions::BNE   =>  true,
-        Instructions::LI    =>  false,
+        Instructions::BLT   |
+        Instructions::BLTU  |
+        Instructions::BGE   |
+        Instructions::BGEU  |
+        Instructions::BEQ   |
+        Instructions::BNE   |
         Instructions::J     =>  true,
-        Instructions::CIN   =>  false,
-        Instructions::COUT  =>  false,
         _ => panic!("[check_command_has_label] Invalid instruction."),
       }
 }
