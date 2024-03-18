@@ -24,33 +24,6 @@ fn get_alu_op(operation: &Instructions) -> Vec<u8> {
     }
 }
 
-fn get_op_code(instruction: &Instructions) -> Vec<u8> {
-    match instruction {
-        Instructions::None  =>  vec![0, 0, 0, 0, 0, 0, 0, 0], // todo!
-        Instructions::ADD   =>  vec![0, 0, 1, 1, 0, 0, 1, 1],
-        Instructions::SUB   =>  vec![0, 0, 1, 1, 0, 0, 1, 1],
-        Instructions::XOR   =>  vec![0, 0, 1, 1, 0, 0, 1, 1],
-        Instructions::OR    =>  vec![0, 0, 1, 1, 0, 0, 1, 1],
-        Instructions::AND   =>  vec![0, 0, 1, 1, 0, 0, 1, 1],
-        Instructions::SRA   =>  vec![0, 0, 1, 1, 0, 0, 1, 1],
-        Instructions::SLL   =>  vec![0, 0, 1, 1, 0, 0, 1, 1],
-        Instructions::SRL   =>  vec![0, 0, 1, 1, 0, 0, 1, 1],
-        Instructions::SLTS  =>  vec![0, 0, 0, 0, 0, 0, 0, 0], // todo!
-        Instructions::SLTU  =>  vec![0, 0, 1, 1, 0, 0, 1, 1],
-        Instructions::BLT   =>  vec![0, 1, 1, 0, 0, 0, 1, 1],
-        Instructions::BLTU  =>  vec![0, 1, 1, 0, 0, 0, 1, 1],
-        Instructions::BGE   =>  vec![0, 1, 1, 0, 0, 0, 1, 1],
-        Instructions::BGEU  =>  vec![0, 1, 1, 0, 0, 0, 1, 1],
-        Instructions::BEQ   =>  vec![0, 1, 1, 0, 0, 0, 1, 1],
-        Instructions::BNE   =>  vec![0, 1, 1, 0, 0, 0, 1, 1],
-        Instructions::LI    =>  vec![0, 0, 1, 1, 0, 1, 1, 1], // check!
-        Instructions::J     =>  vec![0, 1, 1, 0, 1, 1, 1, 1], // check!
-        Instructions::CIN   =>  vec![0, 0, 0, 0, 0, 0, 0, 0], // todo!
-        Instructions::COUT  =>  vec![0, 0, 0, 0, 0, 0, 0, 0], // todo!
-        _ => panic!("[get_op_code] Invalid instruction."),
-    }
-}
-
 fn string_to_binary_array(data: &str) -> Vec<u8> {
     let number = i8::from_str_radix(data, 10).expect("Failed to parse string as number") as u8;
     let mut binary_array: Vec<u8> = vec![];
