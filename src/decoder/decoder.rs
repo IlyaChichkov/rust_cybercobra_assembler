@@ -165,78 +165,15 @@ fn get_arguments(instruction: &Instructions, command_line: &String) -> Result<Ve
         Instructions::None => {
             panic!("Unknown instruction: None");
         }
-        Instructions::ADD   =>  {
-            if parts.len() != 3 {
-                return Err("Not enough arguments!".to_string());
-            }
-            arguments.push(CommandArg { c_type: (ArgType::Register), c_value: (parts[0].to_string()) });
-            arguments.push(CommandArg { c_type: (ArgType::Register), c_value: (parts[1].to_string()) });
-            arguments.push(CommandArg { c_type: (ArgType::Register), c_value: (parts[2].to_string()) });
-        }
-        Instructions::SUB   =>  {
-            if parts.len() != 3 {
-                return Err("Not enough arguments!".to_string());
-            }
-            arguments.push(CommandArg { c_type: (ArgType::Register), c_value: (parts[0].to_string()) });
-            arguments.push(CommandArg { c_type: (ArgType::Register), c_value: (parts[1].to_string()) });
-            arguments.push(CommandArg { c_type: (ArgType::Register), c_value: (parts[2].to_string()) });
-        }
-        Instructions::XOR   =>  {
-            if parts.len() != 3 {
-                return Err("Not enough arguments!".to_string());
-            }
-            arguments.push(CommandArg { c_type: (ArgType::Register), c_value: (parts[0].to_string()) });
-            arguments.push(CommandArg { c_type: (ArgType::Register), c_value: (parts[1].to_string()) });
-            arguments.push(CommandArg { c_type: (ArgType::Register), c_value: (parts[2].to_string()) });
-        }
-        Instructions::OR    =>  {
-            if parts.len() != 3 {
-                return Err("Not enough arguments!".to_string());
-            }
-            arguments.push(CommandArg { c_type: (ArgType::Register), c_value: (parts[0].to_string()) });
-            arguments.push(CommandArg { c_type: (ArgType::Register), c_value: (parts[1].to_string()) });
-            arguments.push(CommandArg { c_type: (ArgType::Register), c_value: (parts[2].to_string()) });
-        }
-        Instructions::AND   =>  {
-            if parts.len() != 3 {
-                return Err("Not enough arguments!".to_string());
-            }
-            arguments.push(CommandArg { c_type: (ArgType::Register), c_value: (parts[0].to_string()) });
-            arguments.push(CommandArg { c_type: (ArgType::Register), c_value: (parts[1].to_string()) });
-            arguments.push(CommandArg { c_type: (ArgType::Register), c_value: (parts[2].to_string()) });
-        }
-        Instructions::SRA   =>  {
-            if parts.len() != 3 {
-                return Err("Not enough arguments!".to_string());
-            }
-            arguments.push(CommandArg { c_type: (ArgType::Register), c_value: (parts[0].to_string()) });
-            arguments.push(CommandArg { c_type: (ArgType::Register), c_value: (parts[1].to_string()) });
-            arguments.push(CommandArg { c_type: (ArgType::Register), c_value: (parts[2].to_string()) });
-        }
-        Instructions::SLL   =>  {
-            if parts.len() != 3 {
-                return Err("Not enough arguments!".to_string());
-            }
-            arguments.push(CommandArg { c_type: (ArgType::Register), c_value: (parts[0].to_string()) });
-            arguments.push(CommandArg { c_type: (ArgType::Register), c_value: (parts[1].to_string()) });
-            arguments.push(CommandArg { c_type: (ArgType::Register), c_value: (parts[2].to_string()) });
-        }
-        Instructions::SRL   =>  {
-            if parts.len() != 3 {
-                return Err("Not enough arguments!".to_string());
-            }
-            arguments.push(CommandArg { c_type: (ArgType::Register), c_value: (parts[0].to_string()) });
-            arguments.push(CommandArg { c_type: (ArgType::Register), c_value: (parts[1].to_string()) });
-            arguments.push(CommandArg { c_type: (ArgType::Register), c_value: (parts[2].to_string()) });
-        }
-        Instructions::SLTS  =>  {
-            if parts.len() != 3 {
-                return Err("Not enough arguments!".to_string());
-            }
-            arguments.push(CommandArg { c_type: (ArgType::Register), c_value: (parts[0].to_string()) });
-            arguments.push(CommandArg { c_type: (ArgType::Register), c_value: (parts[1].to_string()) });
-            arguments.push(CommandArg { c_type: (ArgType::Register), c_value: (parts[2].to_string()) });
-        }
+        Instructions::ADD  |
+        Instructions::SUB  |
+        Instructions::XOR  |
+        Instructions::OR   |
+        Instructions::AND  |
+        Instructions::SRA  |
+        Instructions::SLL  |
+        Instructions::SRL  |
+        Instructions::SLTS |
         Instructions::SLTU  =>  {
             if parts.len() != 3 {
                 return Err("Not enough arguments!".to_string());
@@ -245,46 +182,11 @@ fn get_arguments(instruction: &Instructions, command_line: &String) -> Result<Ve
             arguments.push(CommandArg { c_type: (ArgType::Register), c_value: (parts[1].to_string()) });
             arguments.push(CommandArg { c_type: (ArgType::Register), c_value: (parts[2].to_string()) });
         }
-        Instructions::BLT   =>  {
-            if parts.len() != 3 {
-                return Err("Not enough arguments!".to_string());
-            }
-            arguments.push(CommandArg { c_type: (ArgType::Register),  c_value: (parts[0].to_string()) });
-            arguments.push(CommandArg { c_type: (ArgType::Register),  c_value: (parts[1].to_string()) });
-            arguments.push(CommandArg { c_type: (ArgType::Label),     c_value: (parts[2].to_string()) });
-        }
-        Instructions::BLTU  =>  {
-            if parts.len() != 3 {
-                return Err("Not enough arguments!".to_string());
-            }
-            arguments.push(CommandArg { c_type: (ArgType::Register),  c_value: (parts[0].to_string()) });
-            arguments.push(CommandArg { c_type: (ArgType::Register),  c_value: (parts[1].to_string()) });
-            arguments.push(CommandArg { c_type: (ArgType::Label),     c_value: (parts[2].to_string()) });
-        }
-        Instructions::BGE   =>  {
-            if parts.len() != 3 {
-                return Err("Not enough arguments!".to_string());
-            }
-            arguments.push(CommandArg { c_type: (ArgType::Register),  c_value: (parts[0].to_string()) });
-            arguments.push(CommandArg { c_type: (ArgType::Register),  c_value: (parts[1].to_string()) });
-            arguments.push(CommandArg { c_type: (ArgType::Label),     c_value: (parts[2].to_string()) });
-        }
-        Instructions::BGEU  =>  {
-            if parts.len() != 3 {
-                return Err("Not enough arguments!".to_string());
-            }
-            arguments.push(CommandArg { c_type: (ArgType::Register),  c_value: (parts[0].to_string()) });
-            arguments.push(CommandArg { c_type: (ArgType::Register),  c_value: (parts[1].to_string()) });
-            arguments.push(CommandArg { c_type: (ArgType::Label),     c_value: (parts[2].to_string()) });
-        }
-        Instructions::BEQ   =>  {
-            if parts.len() != 3 {
-                return Err("Not enough arguments!".to_string());
-            }
-            arguments.push(CommandArg { c_type: (ArgType::Register),  c_value: (parts[0].to_string()) });
-            arguments.push(CommandArg { c_type: (ArgType::Register),  c_value: (parts[1].to_string()) });
-            arguments.push(CommandArg { c_type: (ArgType::Label),     c_value: (parts[2].to_string()) });
-        }
+        Instructions::BLT  |
+        Instructions::BLTU |
+        Instructions::BGE  |
+        Instructions::BGEU |
+        Instructions::BEQ  |
         Instructions::BNE   =>  {
             if parts.len() != 3 {
                 return Err("Not enough arguments!".to_string());
