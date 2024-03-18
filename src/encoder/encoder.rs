@@ -1,6 +1,5 @@
 use core::{arch, num};
 
-use rand::prelude::*;
 use crate::decoder::decoder::{self, Command, Instructions};
 
 
