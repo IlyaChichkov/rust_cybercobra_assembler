@@ -1,5 +1,3 @@
-use std::fmt::write;
-
 pub enum Instructions {
     None,
     ADD,
