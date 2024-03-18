@@ -73,7 +73,7 @@ fn binary_array_to_int(binary_data: &Vec<u8>) -> u32 {
 fn fill_binary_array(array: &mut Vec<u8>, cnt: u32) {
     for i in 0..cnt {
         array.push(0)
-      }
+    }
 }
 
 pub fn encode_commands(commands: &mut Vec<Command>) -> Result<(), String>{
@@ -98,9 +98,7 @@ pub fn encode_commands(commands: &mut Vec<Command>) -> Result<(), String>{
             Instructions::SLTU  =>  {
                 println!("Add instruction: {}", &command.instruction);
 
-                command_binary_array.push(0);
-                command_binary_array.push(0);
-                command_binary_array.push(0);
+                fill_binary_array(&mut command_binary_array, 3);
                 // WS
                 command_binary_array.push(1);
                 // ALUop
@@ -110,14 +108,7 @@ pub fn encode_commands(commands: &mut Vec<Command>) -> Result<(), String>{
                 // rs2
                 command_binary_array.extend(&string_to_binary_array(&command.arguments[2].c_value)[3..]);
                 // func 3
-                command_binary_array.push(0);
-                command_binary_array.push(0);
-                command_binary_array.push(0);
-                command_binary_array.push(0);
-                command_binary_array.push(0);
-                command_binary_array.push(0);
-                command_binary_array.push(0);
-                command_binary_array.push(0);
+                fill_binary_array(&mut command_binary_array, 8);
                 // rd
                 command_binary_array.extend(&string_to_binary_array(&command.arguments[0].c_value)[3..]);
                 
@@ -150,11 +141,7 @@ pub fn encode_commands(commands: &mut Vec<Command>) -> Result<(), String>{
                 // offset
                 command_binary_array.extend(&string_to_binary_array(&command.arguments[2].c_value));
                 // WA
-                command_binary_array.push(0);
-                command_binary_array.push(0);
-                command_binary_array.push(0);
-                command_binary_array.push(0);
-                command_binary_array.push(0);
+                fill_binary_array(&mut command_binary_array, 5);
                 
                 let cmd = binary_array_to_int(&command_binary_array);
                 lines.push(cmd);
@@ -177,25 +164,12 @@ pub fn encode_commands(commands: &mut Vec<Command>) -> Result<(), String>{
                 // ALUop
                 command_binary_array.extend(&get_alu_op(&command.instruction));
                 // rs1
-                command_binary_array.push(0);
-                command_binary_array.push(0);
-                command_binary_array.push(0);
-                command_binary_array.push(0);
-                command_binary_array.push(0);
                 // rs2
-                command_binary_array.push(0);
-                command_binary_array.push(0);
-                command_binary_array.push(0);
-                command_binary_array.push(0);
-                command_binary_array.push(0);
+                fill_binary_array(&mut command_binary_array, 10);
                 // offset
                 command_binary_array.extend(&string_to_binary_array(&command.arguments[0].c_value));
                 // WA
-                command_binary_array.push(0);
-                command_binary_array.push(0);
-                command_binary_array.push(0);
-                command_binary_array.push(0);
-                command_binary_array.push(0);
+                fill_binary_array(&mut command_binary_array, 5);
                 
                 let cmd = binary_array_to_int(&command_binary_array);
                 lines.push(cmd);
