@@ -2,7 +2,6 @@ use std::io;
 use std::io::prelude::*;
 use std::fs;
 use std::env;
-use rand;
 
 mod decoder;
 mod encoder;
