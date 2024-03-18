@@ -1,5 +1,3 @@
-use core::{arch, num};
-
 use crate::decoder::decoder::{self, Command, Instructions};
 
 
@@ -72,36 +70,14 @@ fn binary_array_to_int(binary_data: &Vec<u8>) -> u32 {
     return value;
 }
 
-fn print_binary_array(binary_data: &Vec<u8>) {
-    let mut fbits = 0;
-    for i in 0..32 {
-        if let Some(val) = binary_data.get(i) {
-            print!("{}", val);
-        }
-        else {
-            print!("0");
-        }
-        if fbits >= 3 {
-          print!(".");
-          fbits = 0;
-        }
-        else {
-          fbits += 1;
-        }
+fn fill_binary_array(array: &mut Vec<u8>, cnt: u32) {
+    for i in 0..cnt {
+        array.push(0)
       }
 }
 
 pub fn encode_commands(commands: &mut Vec<Command>) -> Result<(), String>{
     let mut lines: Vec<u32> = vec![];
-
-    const ASIZE_3_0: [&'static u8; 3] = [&0, &0, &0];
-    const ASIZE_3_1: [&'static u8; 3] = [&0, &0, &1];
-    const ASIZE_3_2: [&'static u8; 3] = [&0, &1, &0];
-    const ASIZE_3_3: [&'static u8; 3] = [&0, &1, &1];
-    const ASIZE_3_4: [&'static u8; 3] = [&1, &0, &0];
-    const ASIZE_3_5: [&'static u8; 3] = [&1, &0, &1];
-    const ASIZE_3_6: [&'static u8; 3] = [&1, &1, &0];
-    const ASIZE_3_7: [&'static u8; 3] = [&1, &1, &1];
 
     for command in &commands[..] {
         let mut command_binary_array: Vec<u8> = vec![];
